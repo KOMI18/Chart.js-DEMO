@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Démonstration Chart.js avec Bootstrap</title>
+    <!-- Inclure Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Inclure Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container mt-5">
+        <h2>Graphique à barres</h2>
+        <canvas id="barChart"></canvas>
+        <h2>Graphique linéaire</h2>
+        <canvas id="lineChart"></canvas>
+        
+        
+    </div>
+    
+    <script>
+        // Générer des données aléatoires
+        function generateData() {
+            const data = [];
+            const labels = [];
+            for (let i = 0; i < 50; i++) {
+                data.push(Math.floor(Math.random() * 100)); // Générer une valeur aléatoire entre 0 et 100
+                labels.push(`Point ${i + 1}`);
+            }
+            return { data, labels };
+        }
+    
+        // Configurer le graphique à barres
+        const barCtx = document.getElementById('barChart').getContext('2d');
+        const { data: barData, labels: barLabels } = generateData();
+        const barColors = barData.map(() => `rgba(${Math.random() * 255}, ${Math.random() * 255}, ${Math.random() * 255}, 0.5)`);
+        const barChart = new Chart(barCtx, {
+            type: 'bar',
+            data: {
+                labels: barLabels,
+                datasets: [{
+                    label: 'Exemple de données',
+                    data: barData,
+                    backgroundColor: barColors,
+                    borderColor: barColors,
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+    
+        // Configurer le graphique linéaire
+        const lineCtx = document.getElementById('lineChart').getContext('2d');
+        const { data: lineData, labels: lineLabels } = generateData();
+        const lineColors = lineData.map(() => `rgba(${Math.random() * 255}, ${Math.random() * 255}, ${Math.random() * 255}, 0.5)`);
+        const lineChart = new Chart(lineCtx, {
+            type: 'line',
+            data: {
+                labels: lineLabels,
+                datasets: [{
+                    label: 'Exemple de données',
+                    data: lineData,
+                    backgroundColor: lineColors,
+                    borderColor: lineColors,
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+    
+   
+      
+    </script>
+    
+</body>
+</html>
